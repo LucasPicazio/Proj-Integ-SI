@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>All members</title>
+</head>
+<body>
+<h1>All Members Page</h1>
+<br>
+<a href="/">Index</a>
+<br>
+<br>
+<br>
+<table>
+	<tr>
+		<td>Full Name</td>
+	</tr>
+	<tr th:each="member: ${members}">
+		<td th:text="${member.fullName}">Full Name</td>
+	</tr>
+</table>
+</body>
+
+</html>
