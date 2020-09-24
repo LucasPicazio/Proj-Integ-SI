@@ -7,44 +7,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="MEMBER")
+@Table(name = "MEMBER")
 public class Member {
-	
+
 	@Id
-	//@SequenceGenerator(name="member_idmember_seq", sequenceName="member_idmember_seq", allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//, generator="member_idmember_seq")
-	@Column(name="MEMBERID")
+	// @SequenceGenerator(name="member_idmember_seq",
+	// sequenceName="member_idmember_seq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // , generator="member_idmember_seq")
+	@Column(name = "MEMBERID")
 	private long memberId;
-	
-	@Column(name="USERNAME")
+
+	@Column(name = "USERNAME")
 	private String username;
-	
-	@Column(name="PASSWORD")
+
+	@Column(name = "PASSWORD")
 	private String password;
-	
-	@Column(name="EMAIL")
+
+	@Column(name = "EMAIL")
 	private String email;
-	
-	@Column(name="FULLNAME")
+
+	@Column(name = "FULLNAME")
 	private String fullName;
-	
-	@Column(name="PHONENUMBER")
+
+	@Column(name = "PHONENUMBER")
 	private String phoneNumber;
 
-	@Column(name="ADDRESS")
+	@Column(name = "ADDRESS")
 	private String address;
-	
-	@Column(name="BIRTHDAY")
+
+	@Column(name = "BIRTHDAY")
 	private String birthday;
-	
 
 	public long getMemberId() {
 		return memberId;
 	}
 
-	public void seMemberId(long memberId) {
+	public void setMemberId(long memberId) {
 		this.memberId = memberId;
 	}
 
@@ -103,6 +102,5 @@ public class Member {
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
-	
-	
+
 }
