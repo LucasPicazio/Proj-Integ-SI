@@ -8,9 +8,6 @@ public class MemberResource implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("MEMBERID")
-    private long memberId;
-
     @JsonProperty("USERNAME")
     private String username;
 
@@ -31,14 +28,6 @@ public class MemberResource implements Serializable {
 
     @JsonProperty("BIRTHDAY")
     private String birthday;
-
-    public long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(long memberId) {
-        this.memberId = memberId;
-    }
 
     public String getUsername() {
         return username;

@@ -10,7 +10,6 @@ public class MemberConversor {
     public Member conversor(MemberResource memberResource) throws Exception {
         try {
             Member member = new Member();
-            member.setMemberId(memberResource.getMemberId());
             member.setUsername(memberResource.getUsername());
             member.setPassword(memberResource.getPassword());
             member.setFullName(memberResource.getFullName());
