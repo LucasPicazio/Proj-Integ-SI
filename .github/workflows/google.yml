@@ -46,6 +46,9 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+        
+    - run: |-
+        mvn -B package --file pom.xml
 
     # Build the Docker image
     - name: Build
