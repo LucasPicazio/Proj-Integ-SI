@@ -21,7 +21,7 @@ jobs:
       with:
         java-version: 11
     - name: Get Public IP
-      run: PUBLIC_IP=`wget http://ipecho.net/plain -O - -q ; echo`
+      run: PUBLIC_IP="teste"
       shell: bash
     - name: Show Public IP
       run: echo $PUBLIC_IP
