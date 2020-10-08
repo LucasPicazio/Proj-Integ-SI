@@ -1,5 +1,6 @@
 package com.pisi.marketplace.data.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,25 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PRODUCT")
+@Table(name = "PRODUCT")
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "product_id")
 	private long productId;
 
+	@Column(name = "product_name")
 	private String productName;
 
+	@Column(name = "product_type")
 	private String productType;
 
+	@Column(name = "description")
 	private String description;
-	
+
+	@Column(name = "stock")
 	private int stock;
-	
+
+	@Column(name = "price")
 	private int price;
-	
+
+	@Column(name = "image_source")
 	private String imageSource;
-	
 
 	public long getProductId() {
 		return productId;
@@ -83,7 +90,4 @@ public class Product {
 		this.imageSource = imageSource;
 	}
 
-
-	
-	
 }

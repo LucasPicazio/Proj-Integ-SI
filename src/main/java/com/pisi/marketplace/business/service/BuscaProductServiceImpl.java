@@ -33,7 +33,6 @@ public class BuscaProductServiceImpl {
                 resultadoProdutos.add(produto);
             }
         }
-
         return resultadoProdutos;
     }
 }
