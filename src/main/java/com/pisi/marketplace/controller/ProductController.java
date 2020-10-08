@@ -7,6 +7,8 @@ import com.pisi.marketplace.business.service.CadastroMemberServiceImpl;
 import com.pisi.marketplace.business.service.LoginMemberServiceImpl;
 import com.pisi.marketplace.resource.model.MemberResource;
 import com.pisi.marketplace.data.entity.Product;
+import com.pisi.marketplace.exception.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +33,8 @@ public class ProductController {
     }
 
     @GetMapping(path = "/search/{buscar}")
-    public List<Product> buscarProdutosPorBuscar(@PathVariable(name = "buscar", required = true) String buscar) {
+    public List<Product> buscarProdutosPorBuscar(@PathVariable(name = "buscar", required = true) String buscar)
+            throws NotFoundException {
         return serviceBuscaProduct.buscarProdutosPorNome(buscar);
     }
 
