@@ -23,7 +23,7 @@ jobs:
  
     - name: Public IP
       id: ip
-      uses: haythem/public-ip@v1.1
+      uses: haythem/public-ip@v1.2
       
     - name: Config Cloud
       uses: GoogleCloudPlatform/github-actions/setup-gcloud@0.1.3
