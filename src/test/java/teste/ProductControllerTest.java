@@ -16,6 +16,7 @@ import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
 import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
 import com.pisi.marketplace.controller.ProductController;
 import com.pisi.marketplace.data.entity.Product;
+import com.pisi.marketplace.resource.model.ProductResource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=ProductController.class)
@@ -38,30 +39,21 @@ public class ProductControllerTest  {
 		Assert.assertNotNull(listaProdutos);
 		}
 	
-//	@Test
-//	public void buscarProdutosPorBuscar() throws Exception{
-//		
-//	}
+	@Test
+	public void salvarProduct() throws Exception{
+		ProductResource product = new ProductResource();
+		controller.salvarProduct(product);
+	    
+	 
+	}
+
+	@Test
+	public void buscarProdutosPorBuscar() throws Exception{
+		String txtBuscar = "cartola";
+		List<Product> produto = controller.buscarProdutosPorBuscar(txtBuscar);
+		Mockito.when(serviceBuscaProduct.buscarProdutosPorNome(txtBuscar)).thenReturn(produto);
+		System.out.println(produto);
+		//Assert.assertEquals(produto.contains(txtBuscar), true);
+	}
 	
-//	@Test
-//	public void logarMember() throws Exception {
-//		ResponseEntity entity = ResponseEntity.status(200).build();
-//		
-//		Mockito.when(serviceLoginMember.loginMember((MemberResource)Mockito.any())).thenReturn(entity);
-//		
-//		ResponseEntity retorno = controller.logarMember(new MemberResource("meuusuario", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998"));
-//		//System.out.println(retorno.getStatusCodeValue()+" "+entity);
-//		Assert.assertEquals(entity, retorno);
-//		Assert.assertEquals(200, retorno.getStatusCodeValue());
-//	}
-//	
-//	@Test
-//	public void salvarMember() throws Exception{
-//		MemberResource member = new MemberResource("meuusuario", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998");
-//		System.out.println();
-//		
-//		Mockito.when(serviceCadastroMember.cadastroMember(member)).thenReturn(true);
-//		boolean retorno = controller.salvarMember(member);
-//		Assert.assertEquals(true, retorno);
-//	}
 }
