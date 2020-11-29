@@ -29,6 +29,17 @@ public class MemberResource implements Serializable {
     @JsonProperty("BIRTHDAY")
     private String birthday;
 
+	
+	public MemberResource(String username, String password,String email,String fullName,String phoneNumber, String address,String birthday) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.fullName = fullName;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.birthday = birthday;
+	}
+    
     public String getUsername() {
         return username;
     }

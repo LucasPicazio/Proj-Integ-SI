@@ -24,8 +24,8 @@ public class MemberController {
     private LoginMemberServiceImpl serviceLoginMember;
 
     @PostMapping(path = "/save")
-    public void salvarMember(@RequestBody MemberResource member) {
-        serviceCadastroMember.cadastroMember(member);
+    public boolean salvarMember(@RequestBody MemberResource member) {
+        return serviceCadastroMember.cadastroMember(member);
     }
     
     @SuppressWarnings("rawtypes")

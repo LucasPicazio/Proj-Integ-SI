@@ -18,12 +18,14 @@ public class CadastroMemberServiceImpl {
     @Autowired
     private MemberConversor memberConversor;
 
-    public void cadastroMember(MemberResource memberResource) {
+    public boolean cadastroMember(MemberResource memberResource) {
         try {
             Member member = memberConversor.conversor(memberResource);
             memberRepository.saveAndFlush(member);
+            return true;
         } catch (Exception e) {
             LOG.error("Erro ao cadastrar: " + e.getMessage(), e);
+            return false;
         }
     }
 }
