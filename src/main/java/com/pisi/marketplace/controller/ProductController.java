@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(value = "/api/product")
+@RequestMapping("api/product")
 public class ProductController {
 
     @Autowired
@@ -28,18 +28,18 @@ public class ProductController {
     @Autowired
     private CadastroProductServiceImpl serviceCadastroProduct;
 
-    @GetMapping(path = "/search")
+    @GetMapping("search")
     public List<Product> buscarProdutos() {
         return serviceBuscaProduct.buscarTodosOsProdutos();
     }
 
-    @GetMapping(path = "/search/{buscar}")
+    @GetMapping("search/{buscar}")
     public List<Product> buscarProdutosPorBuscar(@PathVariable(name = "buscar", required = true) String buscar)
             throws NotFoundException {
         return serviceBuscaProduct.buscarProdutosPorNome(buscar);
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping("save")
     public void salvarProduct(@RequestBody ProductResource product) {
         serviceCadastroProduct.cadastroProduct(product);
     }
