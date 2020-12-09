@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping(value = "/api/members")
+@RequestMapping("api/members")
 public class MemberController {
 
     @Autowired
@@ -23,13 +23,13 @@ public class MemberController {
     @Autowired
     private LoginMemberServiceImpl serviceLoginMember;
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "save")
     public boolean salvarMember(@RequestBody MemberResource member) {
         return serviceCadastroMember.cadastroMember(member);
     }
     
     @SuppressWarnings("rawtypes")
-	@PostMapping(path = "/login")
+	@PostMapping(path = "login")
     public ResponseEntity logarMember(@RequestBody MemberResource member) throws Exception {
     	return serviceLoginMember.loginMember(member);
     }
