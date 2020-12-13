@@ -32,7 +32,17 @@ public class Transaction {
 	
 	private String status;
 	
+	private String date;
 	
+	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public long getTransactionId() {
 		return transactionId;
