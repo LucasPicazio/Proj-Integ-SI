@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME", name = "username_uk"))
+
 public class Member {
 
 	@Id
@@ -17,6 +19,9 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // , generator="member_idmember_seq")
 	@Column(name = "MEMBERID")
 	private long memberId;
+	
+	@Column(name = "ADMIN")
+	private String ADMIN;
 
 	@Column(name = "USERNAME")
 	private String username;
@@ -47,6 +52,15 @@ public class Member {
 		this.memberId = memberId;
 	}
 
+
+	public String getADMIN() {
+		return ADMIN;
+	}
+
+	public void setADMIN(String string) {
+		ADMIN = string;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

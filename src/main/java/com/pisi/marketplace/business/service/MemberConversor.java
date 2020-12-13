@@ -11,6 +11,7 @@ public class MemberConversor {
         try {
             Member member = new Member();
             member.setUsername(memberResource.getUsername());
+            member.setADMIN(memberResource.getAdmin());
             member.setPassword(memberResource.getPassword());
             member.setFullName(memberResource.getFullName());
             member.setPhoneNumber(memberResource.getPhoneNumber());

@@ -10,6 +10,9 @@ public class MemberResource implements Serializable {
 
     @JsonProperty("USERNAME")
     private String username;
+    
+    @JsonProperty("ADMIN")
+    private String admin;
 
     @JsonProperty("PASSWORD")
     private String password;
@@ -30,8 +33,9 @@ public class MemberResource implements Serializable {
     private String birthday;
 
 	
-	public MemberResource(String username, String password,String email,String fullName,String phoneNumber, String address,String birthday) {
+	public MemberResource(String username, String admin,String password,String email,String fullName,String phoneNumber, String address,String birthday) {
 		this.username = username;
+		this.admin = admin;
 		this.password = password;
 		this.email = email;
 		this.fullName = fullName;
@@ -40,7 +44,15 @@ public class MemberResource implements Serializable {
 		this.birthday = birthday;
 	}
     
-    public String getUsername() {
+    public String getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+
+	public String getUsername() {
         return username;
     }
 
@@ -96,10 +108,11 @@ public class MemberResource implements Serializable {
         this.birthday = birthday;
     }
 
-    @Override
-    public String toString() {
-        return "MemberResource [username=" + username + ", email=" + email + ", fullname=" + fullName + ", phonenumber="
-                + phoneNumber + ", address=" + address + ", birthday=" + birthday + "]";
-    }
+	@Override
+	public String toString() {
+		return "MemberResource [username=" + username + ", admin=" + admin + ", password=" + password + ", email="
+				+ email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", address=" + address
+				+ ", birthday=" + birthday + "]";
+	}
 
 }

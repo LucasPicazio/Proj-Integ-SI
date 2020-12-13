@@ -36,7 +36,7 @@ public class MemberControllerTest  {
 		
 		Mockito.when(serviceLoginMember.loginMember((MemberResource)Mockito.any())).thenReturn(entity);
 		
-		ResponseEntity retorno = controller.logarMember(new MemberResource("meuusuario", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998"));
+		ResponseEntity retorno = controller.logarMember(new MemberResource("meuusuario", "0", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998"));
 		//System.out.println(retorno.getStatusCodeValue()+" "+entity);
 		Assert.assertEquals(entity, retorno);
 		Assert.assertEquals(200, retorno.getStatusCodeValue());
@@ -44,7 +44,7 @@ public class MemberControllerTest  {
 	
 	@Test
 	public void salvarMember() throws Exception{
-		MemberResource member = new MemberResource("meuusuario", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998");
+		MemberResource member = new MemberResource("meuusuario", "0","minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998");
 		System.out.println();
 		
 		Mockito.when(serviceCadastroMember.cadastroMember(member)).thenReturn(true);
