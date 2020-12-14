@@ -2,8 +2,9 @@ package com.pisi.marketplace.controller;
 
 import java.util.List;
 
-import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
-import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
+//import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
+//import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
+import com.pisi.marketplace.business.service.ProductService;
 import com.pisi.marketplace.data.entity.Product;
 import com.pisi.marketplace.exception.NotFoundException;
 import com.pisi.marketplace.resource.model.ProductResource;
@@ -23,24 +24,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
     @Autowired
-    private BuscaProductServiceImpl serviceBuscaProduct;
-
-    @Autowired
-    private CadastroProductServiceImpl serviceCadastroProduct;
+    private ProductService productService;
 
     @GetMapping("search")
-    public List<Product> buscarProdutos() {
-        return serviceBuscaProduct.buscarTodosOsProdutos();
+    public List<Product> searchProducts() {
+        return productService.findAllProducts();
     }
 
-    @GetMapping("search/{buscar}")
-    public List<Product> buscarProdutosPorBuscar(@PathVariable(name = "buscar", required = true) String buscar)
+    @GetMapping("search/{search}")
+    public List<Product> findProductsBySearch(@PathVariable(name = "search", required = true) String search)
             throws NotFoundException {
-        return serviceBuscaProduct.buscarProdutosPorNome(buscar);
+        return productService.findAllProductsByName(search);
     }
 
     @PostMapping("save")
-    public void salvarProduct(@RequestBody ProductResource product) {
-        serviceCadastroProduct.cadastroProduct(product);
+    public void registerProduct(@RequestBody ProductResource product) {
+    	productService.registerProduct(product);
     }
 }

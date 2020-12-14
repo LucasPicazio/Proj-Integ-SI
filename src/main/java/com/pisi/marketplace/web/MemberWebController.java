@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pisi.marketplace.business.service.MemberService;
 import com.pisi.marketplace.data.entity.Member;
 
-@Controller
-@RequestMapping("/members")
+//@Controller
+//@RequestMapping("/members")
 public class MemberWebController {
-
+/*
 	private final MemberService reservationService;
 	
 	@Autowired
@@ -29,5 +29,5 @@ public class MemberWebController {
 		model.addAttribute("members", members);
 		return "members"; // this is going to tell thymeleaf to go find a template named reservations, use that template, 
 		//pass this model that came into the method, but pass it to the reservations template and merge with the thymeleaf engine
-	}
+	} */
 }

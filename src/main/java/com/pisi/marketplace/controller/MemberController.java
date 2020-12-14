@@ -1,7 +1,7 @@
 package com.pisi.marketplace.controller;
 
-import com.pisi.marketplace.business.service.CadastroMemberServiceImpl;
-import com.pisi.marketplace.business.service.LoginMemberServiceImpl;
+import com.pisi.marketplace.business.service.MemberService;
+//import com.pisi.marketplace.business.service.MemberAccountService;
 import com.pisi.marketplace.resource.model.MemberResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     @Autowired
-    private CadastroMemberServiceImpl serviceCadastroMember;
-    
-    @Autowired
-    private LoginMemberServiceImpl serviceLoginMember;
+    private MemberService memberService;
 
-    @PostMapping(path = "save")
-    public boolean salvarMember(@RequestBody MemberResource member) {
-        return serviceCadastroMember.cadastroMember(member);
+    @PostMapping("register")
+    public boolean registerMember(@RequestBody MemberResource member) {
+        return memberService.registerMember(member);
     }
     
     @SuppressWarnings("rawtypes")
-	@PostMapping(path = "login")
-    public ResponseEntity logarMember(@RequestBody MemberResource member) throws Exception {
-    	return serviceLoginMember.loginMember(member);
+	@PostMapping("login")
+    public ResponseEntity loginMember(@RequestBody MemberResource member) throws Exception {
+    	return memberService.loginMember(member);
     }
 
 }

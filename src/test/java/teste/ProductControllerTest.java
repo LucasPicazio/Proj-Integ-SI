@@ -12,8 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
-import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
+//import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
+//import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
+import com.pisi.marketplace.business.service.ProductService;
 import com.pisi.marketplace.controller.ProductController;
 import com.pisi.marketplace.data.entity.Product;
 import com.pisi.marketplace.resource.model.ProductResource;
@@ -23,36 +24,33 @@ import com.pisi.marketplace.resource.model.ProductResource;
 public class ProductControllerTest  {
 
 	@MockBean
-	private CadastroProductServiceImpl serviceCadastroProduct;
-    
-	@MockBean
-	private BuscaProductServiceImpl serviceBuscaProduct;
+	private ProductService productService;
 	
 	@Autowired
 	private ProductController controller;
 	
 	
 	@Test
-	public void buscarProdutos() throws Exception{
-		List<Product> listaProdutos = controller.buscarProdutos();
-		Mockito.when(serviceBuscaProduct.buscarTodosOsProdutos()).thenReturn(listaProdutos);
-		Assert.assertNotNull(listaProdutos);
+	public void findProducts() throws Exception{
+		List<Product> productList = controller.searchProducts();
+		Mockito.when(productService.findAllProducts()).thenReturn(productList);
+		Assert.assertNotNull(productList);
 		}
 	
 	@Test
-	public void salvarProduct() throws Exception{
+	public void registerProduct() throws Exception{
 		ProductResource product = new ProductResource();
-		controller.salvarProduct(product);
+		controller.registerProduct(product);
 	    
 	 
 	}
 
 	@Test
-	public void buscarProdutosPorBuscar() throws Exception{
-		String txtBuscar = "cartola";
-		List<Product> produto = controller.buscarProdutosPorBuscar(txtBuscar);
-		Mockito.when(serviceBuscaProduct.buscarProdutosPorNome(txtBuscar)).thenReturn(produto);
-		System.out.println(produto);
+	public void findProductsBySearch() throws Exception{
+		String toFind = "cartola";
+		List<Product> product = controller.findProductsBySearch(toFind);
+		Mockito.when(productService.findAllProductsByName(toFind)).thenReturn(product);
+		System.out.println(product);
 		//Assert.assertEquals(produto.contains(txtBuscar), true);
 	}
 	
