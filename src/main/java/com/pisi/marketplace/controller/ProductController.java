@@ -1,6 +1,7 @@
 package com.pisi.marketplace.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 //import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
 //import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
@@ -37,8 +38,14 @@ public class ProductController {
         return productService.findAllProductsByName(search);
     }
 
+    @GetMapping("search/id/{searchID}")
+    public Optional<Product> findProductsById(@PathVariable(name = "searchID", required = true) long searchID)
+            throws NotFoundException {
+        return productService.findProductsById(searchID);
+    }
+    
     @PostMapping("save")
-    public void registerProduct(@RequestBody ProductResource product) {
-    	productService.registerProduct(product);
+    public int registerProduct(@RequestBody ProductResource product) {
+    	return productService.registerProduct(product);
     }
 }

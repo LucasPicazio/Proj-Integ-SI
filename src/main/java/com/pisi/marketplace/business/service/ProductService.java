@@ -2,6 +2,7 @@ package com.pisi.marketplace.business.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void registerProduct(ProductResource productResource) {
+    public int registerProduct(ProductResource productResource) {
         try {
         	Product product = conversor(productResource);
             productRepository.saveAndFlush(product);
+            return (int) product.getProductId();
         } catch (Exception e) {
             LOG.error("Erro ao cadastrar: " + e.getMessage(), e);
+            return -1;
         }
     }
 
@@ -45,6 +48,11 @@ public class ProductService {
             }
         }
         return productsResult;
+    }
+    
+    public Optional<Product> findProductsById(long id) {
+    	Optional<Product> productFoundById = productRepository.findById(id);
+    	return productFoundById;
     }
     
     public Product conversor(ProductResource productResource) throws Exception {
