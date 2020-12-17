@@ -11,27 +11,25 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name="CART")
+@Table(name = "CART")
 public class Cart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long cartId;
-	
+
 	@ManyToOne
-	@JoinColumn(name="memberId")
-	@ForeignKey(name="fk_memberId_cart")
+	@JoinColumn(name = "memberId")
+	@ForeignKey(name = "fk_memberId_cart")
 	private Member memberId;
 
 	@ManyToOne
-	@JoinColumn(name="productId")
-	@ForeignKey(name="fk_productId_cart")
+	@JoinColumn(name = "productId")
+	@ForeignKey(name = "fk_productId_cart")
 	private Product productId;
 
 	private int quantity;
 
-	
-	
 	public long getCartId() {
 		return cartId;
 	}
@@ -63,7 +61,5 @@ public class Cart {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
-	
+
 }

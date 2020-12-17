@@ -24,28 +24,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+	@Autowired
+	private ProductService productService;
 
-    @GetMapping("search")
-    public List<Product> searchProducts() {
-        return productService.findAllProducts();
-    }
+	@GetMapping("search")
+	public List<Product> searchProducts() {
+		return productService.findAllProducts();
+	}
 
-    @GetMapping("search/{search}")
-    public List<Product> findProductsBySearch(@PathVariable(name = "search", required = true) String search)
-            throws NotFoundException {
-        return productService.findAllProductsByName(search);
-    }
+	@GetMapping("search/{search}")
+	public List<Product> findProductsBySearch(@PathVariable(name = "search", required = true) String search)
+			throws NotFoundException {
+		return productService.findAllProductsByName(search);
+	}
 
-    @GetMapping("search/id/{searchID}")
-    public Optional<Product> findProductsById(@PathVariable(name = "searchID", required = true) long searchID)
-            throws NotFoundException {
-        return productService.findProductsById(searchID);
-    }
-    
-    @PostMapping("save")
-    public int registerProduct(@RequestBody ProductResource product) {
-    	return productService.registerProduct(product);
-    }
+	@GetMapping("search/id/{searchID}")
+	public Optional<Product> findProductsById(@PathVariable(name = "searchID", required = true) long searchID)
+			throws NotFoundException {
+		return productService.findProductsById(searchID);
+	}
+
+	@PostMapping("save")
+	public int registerProduct(@RequestBody ProductResource product) {
+		return productService.registerProduct(product);
+	}
 }
