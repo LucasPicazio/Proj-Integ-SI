@@ -1,15 +1,9 @@
 package com.pisi.marketplace.resource.model;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ProductResource implements Serializable {
+public class ProductResource {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -1784452599628816658L;
 
     @JsonProperty("productName")
     private String productName;

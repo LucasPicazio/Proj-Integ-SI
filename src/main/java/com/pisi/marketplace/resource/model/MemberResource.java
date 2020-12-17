@@ -1,12 +1,9 @@
 package com.pisi.marketplace.resource.model;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MemberResource implements Serializable {
+public class MemberResource{
 
-    private static final long serialVersionUID = 1L;
 
     @JsonProperty("USERNAME")
     private String username;
