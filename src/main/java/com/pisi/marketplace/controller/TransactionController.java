@@ -1,5 +1,6 @@
 package com.pisi.marketplace.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pisi.marketplace.business.service.TransactionService;
+import com.pisi.marketplace.data.entity.Cart;
+import com.pisi.marketplace.data.entity.Member;
 import com.pisi.marketplace.data.entity.Transaction;
 import com.pisi.marketplace.exception.NotFoundException;
-import com.pisi.marketplace.resource.model.TransactionResource;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -24,8 +25,13 @@ public class TransactionController {
     private TransactionService transactionService;
 
 	@PostMapping("insert")
-    public int insertTransaction(@RequestBody TransactionResource transaction) {
-    	return transactionService.insertTransaction(transaction);
+    public long insertTransaction(List<Cart> cartList) {
+		Member member = transactionService.insertTransaction(cartList);
+		if(member != null) {
+			return member.getMemberId();
+		}
+		return -1;
+    	
     }
 	
 	@GetMapping("search/id/{searchID}")

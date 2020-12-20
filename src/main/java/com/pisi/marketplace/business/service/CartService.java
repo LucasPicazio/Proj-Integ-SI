@@ -1,6 +1,8 @@
 
 package com.pisi.marketplace.business.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.jboss.logging.Logger;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pisi.marketplace.data.entity.Cart;
+import com.pisi.marketplace.data.entity.Member;
 import com.pisi.marketplace.data.entity.repository.CartRepository;
 import com.pisi.marketplace.resource.model.CartResource;
 
@@ -43,7 +46,27 @@ public class CartService {
 		Optional<Cart> cartFoundById = cartRepository.findById(id);
 		return cartFoundById;
 	}
+	
+	public List<Cart> findCartsByMemberId(long id){
+		List<Cart> cartList = cartRepository.findAll();
+		ArrayList<Cart> cartResult = new ArrayList<Cart>();// para armazenar resultados
+		for (Cart cart : cartList) {
+			Member descriptionCart = cart.getMemberId();
+			if (descriptionCart.getMemberId() == id) {
+				cartResult.add(cart);
+			}
+		}
+		return cartResult;
+	}
 
+	public void removeCartsByMemberId(long id){
+		List<Cart> cartList = findCartsByMemberId(id);
+		int i;
+		for(i=0;i<cartList.size();i++) {
+			removeCart(cartList.get(i).getCartId());
+		}
+	}
+	
 	public Cart conversor(CartResource cartResource) throws Exception {
 		try {
 			Cart cart = new Cart();

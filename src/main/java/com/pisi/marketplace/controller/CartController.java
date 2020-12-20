@@ -1,6 +1,7 @@
 package com.pisi.marketplace.controller;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,10 +34,20 @@ public class CartController {
 			throws NotFoundException {
 		return cartService.findCartsById(searchID);
 	}
+	
+	@GetMapping("search/member/{searchMemberID}")
+	public List<Cart> findCartsByMemberId(@PathVariable(name = "searchMemberID", required = true) long searchMemberID)
+			throws NotFoundException {
+		return cartService.findCartsByMemberId(searchMemberID);
+	}
 
 	@PostMapping("{id}/remove")
 	public boolean removeCartsById(@PathVariable(name = "id", required = true) long id) throws NotFoundException {
 		return cartService.removeCart(id);
 	}
 
+	@PostMapping("member/{id}/remove")
+	public void removeCartsByMemberId(@PathVariable(name = "id", required = true) long id) throws NotFoundException {
+		cartService.removeCartsByMemberId(id);
+	}
 }

@@ -1,14 +1,17 @@
 package com.pisi.marketplace.business.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pisi.marketplace.data.entity.Cart;
+import com.pisi.marketplace.data.entity.Member;
 import com.pisi.marketplace.data.entity.Transaction;
 import com.pisi.marketplace.data.entity.repository.TransactionRepository;
-import com.pisi.marketplace.resource.model.TransactionResource;
 
 @Service
 public class TransactionService {
@@ -17,14 +20,19 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
-	public int insertTransaction(TransactionResource transactionResource) {
+	public Member insertTransaction(List<Cart> cartList) {
 		try {
-			Transaction transaction = conversor(transactionResource);
-			transactionRepository.saveAndFlush(transaction);
-			return (int) transaction.getTransactionId();
+			List<Transaction> transactionList = conversor(cartList);
+			int i;
+			for(i=0;i<transactionList.size();i++) {
+				transactionRepository.saveAndFlush(transactionList.get(i));
+				
+			}
+			
+			return transactionList.get(0).getMemberId();
 		} catch (Exception e) {
 			LOG.error("Erro ao cadastrar: " + e.getMessage(), e);
-			return -1;
+			return null;
 		}
 	}
 
@@ -43,15 +51,21 @@ public class TransactionService {
 		return transactionFoundById;
 	}
 
-	public Transaction conversor(TransactionResource transactionResource) throws Exception {
+	public List<Transaction> conversor(List<Cart> cartList) throws Exception {
 		try {
+			int i;
 			Transaction transaction = new Transaction();
-			transaction.setMemberId(transactionResource.getMemberID());
-			transaction.setProductId(transactionResource.getProductID());
-			transaction.setQuantity(transactionResource.getQuantity());
-			return transaction;
+			ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+			for(i = 0; i<cartList.size();i++) {
+				transaction.setMemberId(cartList.get(i).getMemberId());
+				transaction.setProductId(cartList.get(i).getProductId());
+				transaction.setQuantity(cartList.get(i).getQuantity());
+				transactionList.add(transaction);
+			}
+			
+			return transactionList;
 		} catch (Exception e) {
-			throw new Exception("erro: " + transactionResource);
+			throw new Exception("erro: " + cartList);
 		}
 	}
 
