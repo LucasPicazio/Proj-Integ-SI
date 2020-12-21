@@ -28,7 +28,7 @@ public class MemberControllerTest  {
 	
 	
 	@Test
-	public void logarMember() throws Exception {
+	public void loginMember() throws Exception {
 		ResponseEntity entity = ResponseEntity.status(200).build();
 		
 		Mockito.when(memberService.loginMember((MemberResource)Mockito.any())).thenReturn(entity);
@@ -40,7 +40,7 @@ public class MemberControllerTest  {
 	}
 	
 	@Test
-	public void salvarMember() throws Exception{
+	public void registerMember() throws Exception{
 		MemberResource member = new MemberResource("meuusuario", "0","minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998");
 		System.out.println();
 		
