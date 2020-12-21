@@ -29,23 +29,20 @@ public class MemberControllerTest  {
 	
 	@Test
 	public void loginMember() throws Exception {
-		ResponseEntity entity = ResponseEntity.status(200).build();
 		
-		Mockito.when(memberService.loginMember((MemberResource)Mockito.any())).thenReturn(entity);
+		Mockito.when(memberService.loginMember((MemberResource)Mockito.any())).thenReturn(1);
 		
-		ResponseEntity retorno = controller.loginMember(new MemberResource("meuusuario", "0", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998"));
+		int retorno = controller.loginMember(new MemberResource("meuusuario", "0", "minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998"));
 		//System.out.println(retorno.getStatusCodeValue()+" "+entity);
-		Assert.assertEquals(entity, retorno);
-		Assert.assertEquals(200, retorno.getStatusCodeValue());
+		Assert.assertEquals(1, retorno);
 	}
 	
 	@Test
 	public void registerMember() throws Exception{
 		MemberResource member = new MemberResource("meuusuario", "0","minhasenha", "meuemail@gmail.com", "Meu Nome Completo", "(11)98765-4321", "Rua Endereco, 1", "01/02/1998");
-		System.out.println();
 		
-		Mockito.when(memberService.registerMember(member)).thenReturn(true);
-		boolean retorno = controller.registerMember(member);
-		Assert.assertTrue(retorno);
+		Mockito.when(memberService.registerMember(member)).thenReturn(1);
+		int retorno = controller.registerMember(member);
+		Assert.assertEquals(1, retorno);
 	}
 }
