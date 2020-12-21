@@ -38,26 +38,28 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public boolean registerMember(MemberResource memberResource) {
+    public int registerMember(MemberResource memberResource) {
         try {
             Member member = conversor(memberResource);
             memberRepository.saveAndFlush(member);
-            return true;
+            return (int)member.getMemberId();
         } catch (Exception e) {
             LOG.error("Error to register: " + e.getMessage(), e);
-            return false;
+            return -1;
         }
     }
 
     @SuppressWarnings("rawtypes")
-	public ResponseEntity loginMember(MemberResource memberResource) throws Exception {
+	public int loginMember(MemberResource memberResource) throws Exception {
     	Member member = conversor(memberResource);	
         Optional<Member> optionalMember = memberRepository.findMemberByUsername(member.getUsername());
            
         if (optionalMember.isPresent() && optionalMember.get().getPassword().equals(member.getPassword())) {
-        	return new ResponseEntity(HttpStatus.OK);
+        	//return new ResponseEntity(HttpStatus.OK);
+        	return (int) optionalMember.get().getMemberId();
         } else {
-        	return new ResponseEntity(HttpStatus.FORBIDDEN);
+        	//return new ResponseEntity(HttpStatus.FORBIDDEN);
+        	return -1;
         }       
     }
     

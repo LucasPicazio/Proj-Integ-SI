@@ -21,13 +21,13 @@ public class MemberController {
     private MemberService memberService;
 
     @PostMapping("register")
-    public boolean registerMember(@RequestBody MemberResource member) {
+    public int registerMember(@RequestBody MemberResource member) {
         return memberService.registerMember(member);
     }
     
     @SuppressWarnings("rawtypes")
 	@PostMapping("login")
-    public ResponseEntity loginMember(@RequestBody MemberResource member) throws Exception {
+    public int loginMember(@RequestBody MemberResource member) throws Exception {
     	return memberService.loginMember(member);
     }
 
