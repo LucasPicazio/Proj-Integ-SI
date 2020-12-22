@@ -2,6 +2,7 @@ package teste;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -54,4 +55,10 @@ public class ProductControllerTest  {
 		//Assert.assertEquals(produto.contains(txtBuscar), true);
 	}
 	
+	@Test
+	public void findProductsById() throws Exception{
+		long idToFind = 1;
+		Optional<Product> product = controller.findProductsById(idToFind);
+		Assert.assertFalse(product.isPresent());//errad
+	}
 }

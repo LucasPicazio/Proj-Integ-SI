@@ -3,13 +3,6 @@ package com.pisi.marketplace.controller;
 import java.util.List;
 import java.util.Optional;
 
-//import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
-//import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
-import com.pisi.marketplace.business.service.ProductService;
-import com.pisi.marketplace.data.entity.Product;
-import com.pisi.marketplace.exception.NotFoundException;
-import com.pisi.marketplace.resource.model.ProductResource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+//import com.pisi.marketplace.business.service.BuscaProductServiceImpl;
+//import com.pisi.marketplace.business.service.CadastroProductServiceImpl;
+import com.pisi.marketplace.business.service.ProductService;
+import com.pisi.marketplace.data.entity.Product;
+import com.pisi.marketplace.exception.NotFoundException;
+import com.pisi.marketplace.resource.model.ProductResource;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
