@@ -32,10 +32,10 @@ jobs:
         project: ${{ secrets.GKE_PROJECT }}
 
     - name: Set Ips
-      run: gcloud sql instances patch postgre-psi --authorized-networks=${{ steps.ip.outputs.ipv4 }},189.120.79.60,34.73.241.32,35.185.59.139,104.196.12.141,201.68.207.176,187.38.232.140,201.26.155.25,200.171.47.6,200.161.102.129,201.81.27.28,35.237.152.39,35.185.59.139,35.243.161.61
+      run: gcloud sql instances patch postgre-psi --authorized-networks=${{ steps.ip.outputs.ipv4 }},189.120.79.60,34.73.241.32,35.185.59.139,104.196.12.141,201.68.207.176,187.38.232.140,201.26.155.25,200.171.47.6,200.161.102.129,35.237.152.39,35.185.59.139,35.243.161.61
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: Set Ips remove
-      run: gcloud sql instances patch postgre-psi --authorized-networks=189.120.79.60,34.73.241.32,35.185.59.139,104.196.12.141,201.68.207.176,187.38.232.140,201.26.155.25,200.171.47.6,200.161.102.129,201.81.27.28,35.237.152.39,35.185.59.139,35.243.161.61
+      run: gcloud sql instances patch postgre-psi --authorized-networks=189.120.79.60,34.73.241.32,35.185.59.139,104.196.12.141,201.68.207.176,187.38.232.140,201.26.155.25,200.171.47.6,200.161.102.129,35.237.152.39,35.185.59.139,35.243.161.61
