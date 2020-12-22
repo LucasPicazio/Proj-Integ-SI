@@ -41,8 +41,8 @@ public class MemberService {
     public int registerMember(MemberResource memberResource) {
         try {
             Member member = conversor(memberResource);
-            memberRepository.saveAndFlush(member);
-            return (int)member.getMemberId();
+            var res = memberRepository.saveAndFlush(member);
+            return (int)res.getMemberId();
         } catch (Exception e) {
             LOG.error("Error to register: " + e.getMessage(), e);
             return -1;
@@ -51,10 +51,11 @@ public class MemberService {
 
     @SuppressWarnings("rawtypes")
 	public int loginMember(MemberResource memberResource) throws Exception {
+    	System.out.println("MMMMM "+memberResource.getPassword());
     	Member member = conversor(memberResource);	
         Optional<Member> optionalMember = memberRepository.findMemberByUsername(member.getUsername());
-           
-        if (optionalMember.isPresent() && optionalMember.get().getPassword().equals(member.getPassword())) {
+
+        if (optionalMember.isPresent() && optionalMember.get().getUsername().equals(member.getUsername()) && optionalMember.get().getPassword().equals(member.getPassword())) {
         	//return new ResponseEntity(HttpStatus.OK);
         	return (int) optionalMember.get().getMemberId();
         } else {

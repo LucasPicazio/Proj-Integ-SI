@@ -1,6 +1,5 @@
 package com.pisi.marketplace.business.service;
 
-
 import java.util.Optional;
 
 import org.junit.Assert;
@@ -22,33 +21,60 @@ import com.pisi.marketplace.resource.model.MemberResource;
 public class MemberRepositoryTest {
 	@MockBean
 	private MemberRepository repository;
-	
+
 	@Autowired
 	private MemberService service;
-	
+
 	@Test
 	public void registerMember() {
-		Member membro = new Member();
-		membro.setMemberId(0);
-		membro.setUsername("username");
-		
-		Mockito.when(repository.save((Member)Mockito.any())).thenReturn(membro);
-		
-		int salvo = service.registerMember(new MemberResource("username","true","pass","lala@lala.com","fullname","9999-9999","rua endereco","21/04/1990"));
-		Assert.assertEquals(salvo, membro.getMemberId());
+		Member member = new Member();
+		member.setMemberId(5);
+		member.setUsername("username");
+		member.setPassword("pass");
+
+		Mockito.when(repository.saveAndFlush((Member) Mockito.any())).thenReturn(member);
+
+		int iDsaved = service.registerMember(new MemberResource("username", "true", "pass", "lala@lala.com", "fullname",
+				"9999-9999", "rua endereco", "21/04/1990"));
+		Assert.assertEquals(iDsaved, member.getMemberId());
 	}
 	
 	@Test
-	public void loginMemberNotFound() {
-		try {Member member = service.conversor(new MemberResource("username","true","pass","lala@lala.com","fullname","9999-9999","rua endereco","21/04/1990"));	
-		Optional<Member> membro = Optional.empty();
-		Mockito.when(repository.findMemberByUsername(member.getUsername())).thenReturn(membro);
-		
-		int salvo = service.loginMember(new MemberResource("username","true","pass","lala@lala.com","fullname","9999-9999","rua endereco","21/04/1990"));
-		}catch(Exception e) {
-			
-		}
-		
-	}
+	public void registerInvalidMember() {
+		Member member = new Member();
+		member.setMemberId(5);
+		member.setUsername("");
+		member.setPassword("pass");
 
+		int iDsaved = service.registerMember(new MemberResource("username", "true", "pass", "lala@lala.com", "fullname",
+				"9999-9999", "rua endereco", "21/04/1990"));  // blocked by postgre
+		Assert.assertEquals(-1, iDsaved);
+	}
+	
+	@Test
+	public void loginMember() throws Exception {
+		Member member = new Member();
+		member.setUsername("username");
+		member.setPassword("pass");
+		Optional<Member> memberOpt = Optional.of(member);
+	
+		Mockito.when(repository.findMemberByUsername((String) Mockito.any())).thenReturn(memberOpt);
+		
+		MemberResource memberResource = new MemberResource("username", "true", "pass", "lala@lala.com", "fullname",
+				"9999-9999", "rua endereco", "21/04/1990");
+		int iDlogged = service.loginMember(memberResource);
+
+		Assert.assertNotEquals(-1, iDlogged);
+	}
+	
+	@Test
+	public void loginMemberNotFound() throws Exception {
+		MemberResource memberNotRegistered = new MemberResource("username", "true", "pass", "lala@lala.com", "fullname",
+				"9999-9999", "rua endereco", "21/04/1990");
+
+		int memberId = service.loginMember(memberNotRegistered);
+		
+		Assert.assertEquals(-1, memberId);
+	}
+	
 }

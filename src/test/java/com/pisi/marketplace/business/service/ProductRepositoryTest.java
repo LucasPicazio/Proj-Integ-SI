@@ -38,7 +38,7 @@ public class ProductRepositoryTest {
 		produto.setProductId(0);
 		produto.setProductName("xpto");
 		
-		Mockito.when(repository.save((Product)Mockito.any())).thenReturn(produto);
+		Mockito.when(repository.saveAndFlush((Product)Mockito.any())).thenReturn(produto);
 		
 		int salvo = service.registerProduct(new ProductResource());
 		Assert.assertEquals(salvo, produto.getProductId());
