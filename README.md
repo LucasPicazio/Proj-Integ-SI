@@ -15,7 +15,12 @@ Considerações:
 - Indo para seu localhost, uma vez que a app esteja up, só vai ter o index com um hello world e um link para uma pagina que printa os nomes dos membros
   que foram inseridos no banco de dados
   
- -CI/CD
-   - Ao fazer um commit, ira ser realizado um build do projeto Maven e rodar os testes através do github action
-   - Ao criar um release, ira ser criado um pacote jar, uma imagem docker, e sera feito o deploy em um servidor kubernetes na google cloud.
-   - Link para acesso http://35.244.193.158/
+ -Infra
+   - Ao realizar qualquer commit na branch master 3 Actions ( github CI/CD) são executadas.
+      - Build que valida se o novo código esta de acordo com os testes unitarios e faz o deploy no Google Kubernates Engine caso tenha passado.
+      - Build simples responsável por fazer testes e cadastrar IPs para acesso a base de dados.
+      - Build e analise do SonarCloud
+   - Link para acesso do backend http://35.190.128.246:8181/ (swagger disponível)
+   - Link para acesso do frontend http://www.pikazio.com/
+   - Link para acesso do Sonar Back https://sonarcloud.io/dashboard?id=LucasPicazio_Proj-Integ-SI
+   - Link para acesso do Sonar Front https://sonarcloud.io/dashboard?id=LucasPicazio_Proj-Integ-SI-Front
