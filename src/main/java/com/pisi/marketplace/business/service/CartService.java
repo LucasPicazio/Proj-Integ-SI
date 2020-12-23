@@ -59,12 +59,16 @@ public class CartService {
 		return cartResult;
 	}
 
-	public void removeCartsByMemberId(long id){
+	public boolean removeCartsByMemberId(long id){
 		List<Cart> cartList = findCartsByMemberId(id);
+		int qtdRemovido = 0;
 		int i;
 		for(i=0;i<cartList.size();i++) {
 			removeCart(cartList.get(i).getCartId());
+			qtdRemovido+=1;
 		}
+		if(qtdRemovido>0)return true;
+		else return false;
 	}
 	
 	public Cart conversor(CartResource cartResource) throws Exception {
