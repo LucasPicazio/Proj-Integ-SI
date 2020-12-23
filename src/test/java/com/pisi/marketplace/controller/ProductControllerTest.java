@@ -1,4 +1,4 @@
-package teste;
+package com.pisi.marketplace.controller;
 
 import java.util.ArrayList;
 import java.util.List;

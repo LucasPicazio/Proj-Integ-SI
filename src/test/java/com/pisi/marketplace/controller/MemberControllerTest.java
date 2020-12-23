@@ -1,4 +1,4 @@
-package teste;
+package com.pisi.marketplace.controller;
 
 
 import org.junit.Assert;
