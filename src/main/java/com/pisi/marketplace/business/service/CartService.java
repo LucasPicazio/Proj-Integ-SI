@@ -24,8 +24,8 @@ public class CartService {
 	public int insertCart(CartResource cartResource) {
 		try {
 			Cart cart = conversor(cartResource);
-			cartRepository.saveAndFlush(cart);
-			return (int) cart.getCartId();
+			var res = cartRepository.saveAndFlush(cart);
+			return (int) res.getCartId();
 		} catch (Exception e) {
 			LOG.error("Erro ao cadastrar: " + e.getMessage(), e);
 			return -1;

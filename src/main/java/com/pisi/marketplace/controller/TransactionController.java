@@ -25,14 +25,9 @@ public class TransactionController {
     private TransactionService transactionService;
 
 	@PostMapping("insert")
-    public long insertTransaction(List<Cart> cartList) {
-		Member member = transactionService.insertTransaction(cartList);
-		if(member != null) {
-			return member.getMemberId();
-		}
-		return -1;
-    	
-    }
+    public List<Integer> insertTransaction(List<Cart> cartList) {
+		return transactionService.insertTransaction(cartList);
+	}
 	
 	@GetMapping("search/id/{searchID}")
     public Optional<Transaction> findTransactionsById(@PathVariable(name = "searchID", required = true) long searchID)
