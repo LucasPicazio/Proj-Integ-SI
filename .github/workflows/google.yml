@@ -88,3 +88,21 @@ jobs:
     - name: Set Ips remove
       run: gcloud sql instances patch postgre-psi --authorized-networks=189.120.79.60,34.73.241.32,35.185.59.139,104.196.12.141,201.68.207.176,187.38.232.140,201.26.155.25,200.171.47.6,200.161.102.129,35.237.152.39,35.185.59.139,35.243.161.61,34.75.212.245,35.190.167.205,34.75.149.158,201.81.27.28
 
+    - name: Cache SonarCloud packages
+      uses: actions/cache@v1
+      with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+    - name: Cache Maven packages
+      uses: actions/cache@v1
+      with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+    - name: Build and analyze
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+
