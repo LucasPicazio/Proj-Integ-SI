@@ -39,19 +39,7 @@ public class MemberRepositoryTest {
 				"9999-9999", "rua endereco", "21/04/1990"));
 		Assert.assertEquals(iDsaved, member.getMemberId());
 	}
-	
-	@Test
-	public void registerInvalidMember() {
-		Member member = new Member();
-		member.setMemberId(5);
-		member.setUsername("");
-		member.setPassword("pass");
 
-		int iDsaved = service.registerMember(new MemberResource("username", "true", "pass", "lala@lala.com", "fullname",
-				"9999-9999", "rua endereco", "21/04/1990"));  // blocked by postgre
-		Assert.assertEquals(-1, iDsaved);
-	}
-	
 	@Test
 	public void loginMember() throws Exception {
 		Member member = new Member();
