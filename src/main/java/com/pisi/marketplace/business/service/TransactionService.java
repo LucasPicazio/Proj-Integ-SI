@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pisi.marketplace.data.entity.Cart;
 import com.pisi.marketplace.data.entity.Member;
+import com.pisi.marketplace.data.entity.Product;
 import com.pisi.marketplace.data.entity.Transaction;
 import com.pisi.marketplace.data.entity.repository.TransactionRepository;
 
@@ -20,16 +21,17 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
-	public Member insertTransaction(List<Cart> cartList) {
+	public List<Integer> insertTransaction(List<Cart> cartList) {
 		try {
+			List<Integer> idsList = new ArrayList<Integer>();
 			List<Transaction> transactionList = conversor(cartList);
 			int i;
 			for(i=0;i<transactionList.size();i++) {
 				transactionRepository.saveAndFlush(transactionList.get(i));
-				
+				idsList.add((int)transactionList.get(i).getTransactionId());
 			}
 			
-			return transactionList.get(0).getMemberId();
+			return idsList;
 		} catch (Exception e) {
 			LOG.error("Erro ao cadastrar: " + e.getMessage(), e);
 			return null;
@@ -49,6 +51,11 @@ public class TransactionService {
 	public Optional<Transaction> findTransactionsById(long id) {
 		Optional<Transaction> transactionFoundById = transactionRepository.findById(id);
 		return transactionFoundById;
+	}
+	
+	public List<Transaction> findAllTransactions(){
+		List<Transaction> listTransactions = transactionRepository.findAll();
+		return listTransactions;
 	}
 
 	public List<Transaction> conversor(List<Cart> cartList) throws Exception {
