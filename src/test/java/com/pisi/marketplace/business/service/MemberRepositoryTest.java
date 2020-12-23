@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.pisi.marketplace.business.service.MemberService;
 import com.pisi.marketplace.data.entity.Member;
 import com.pisi.marketplace.data.entity.repository.MemberRepository;
 import com.pisi.marketplace.resource.model.MemberResource;

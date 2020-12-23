@@ -22,8 +22,8 @@ public class ProductService {
 	public int registerProduct(ProductResource productResource) {
 		try {
 			Product product = conversor(productResource);
-			productRepository.saveAndFlush(product);
-			return (int) product.getProductId();
+			var res = productRepository.saveAndFlush(product);
+			return (int) res.getProductId();
 		} catch (Exception e) {
 			LOG.error("Erro ao cadastrar: " + e.getMessage(), e);
 			return -1;

@@ -51,7 +51,6 @@ public class MemberService {
 
     @SuppressWarnings("rawtypes")
 	public int loginMember(MemberResource memberResource) throws Exception {
-    	System.out.println("MMMMM "+memberResource.getPassword());
     	Member member = conversor(memberResource);	
         Optional<Member> optionalMember = memberRepository.findMemberByUsername(member.getUsername());
 
