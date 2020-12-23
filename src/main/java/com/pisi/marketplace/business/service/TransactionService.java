@@ -1,5 +1,6 @@
 package com.pisi.marketplace.business.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import com.pisi.marketplace.data.entity.Member;
 import com.pisi.marketplace.data.entity.Product;
 import com.pisi.marketplace.data.entity.Transaction;
 import com.pisi.marketplace.data.entity.repository.TransactionRepository;
+import com.pisi.marketplace.resource.model.CartResource;
 
 @Service
 public class TransactionService {
@@ -21,14 +23,14 @@ public class TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
-	public List<Integer> insertTransaction(List<Cart> cartList) {
+	public List<Integer> insertTransaction(List<CartResource> cartList) {
 		try {
 			List<Integer> idsList = new ArrayList<Integer>();
 			List<Transaction> transactionList = conversor(cartList);
 			int i;
 			for(i=0;i<transactionList.size();i++) {
-				transactionRepository.saveAndFlush(transactionList.get(i));
-				idsList.add((int)transactionList.get(i).getTransactionId());
+				var transaction = transactionRepository.saveAndFlush(transactionList.get(i));
+				idsList.add((int)transaction.getTransactionId());
 			}
 			
 			return idsList;
@@ -38,6 +40,18 @@ public class TransactionService {
 		}
 	}
 
+	public List<Transaction> findTransactionsByMemberId(long id){
+		List<Transaction> transacList = transactionRepository.findAll();
+		ArrayList<Transaction> transacResult = new ArrayList<Transaction>();
+		for (Transaction t : transacList) {
+			Member descriptionTransac = t.getMemberId();
+			if (descriptionTransac.getMemberId() == id) {
+				transacResult.add(t);
+			}
+		}
+		return transacResult;
+	}
+	
 	public boolean removeTransaction(long id) {
 		try {
 			transactionRepository.deleteById(id);
@@ -58,15 +72,17 @@ public class TransactionService {
 		return listTransactions;
 	}
 
-	public List<Transaction> conversor(List<Cart> cartList) throws Exception {
+	public List<Transaction> conversor(List<CartResource> cartList) throws Exception {
 		try {
 			int i;
-			Transaction transaction = new Transaction();
+			Transaction transaction;
 			ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 			for(i = 0; i<cartList.size();i++) {
-				transaction.setMemberId(cartList.get(i).getMemberId());
-				transaction.setProductId(cartList.get(i).getProductId());
+				transaction = new Transaction();
+				transaction.setMemberId(cartList.get(i).getMemberID());
+				transaction.setProductId(cartList.get(i).getProductID());
 				transaction.setQuantity(cartList.get(i).getQuantity());
+				transaction.setDate(LocalDateTime.now().toString());
 				transactionList.add(transaction);
 			}
 			
