@@ -47,7 +47,7 @@ public class CartController {
 	}
 
 	@PostMapping("member/{id}/remove")
-	public void removeCartsByMemberId(@PathVariable(name = "id", required = true) long id) throws NotFoundException {
-		cartService.removeCartsByMemberId(id);
+	public boolean removeCartsByMemberId(@PathVariable(name = "id", required = true) long id) throws NotFoundException {
+		return cartService.removeCartsByMemberId(id);
 	}
 }
